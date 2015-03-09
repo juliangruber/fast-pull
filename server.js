@@ -3,6 +3,7 @@ var readdir = require('recursive-readdir');
 var Emitter = require('events').EventEmitter;
 var inherits = require('util').inherits;
 var resolve = require('path').resolve;
+var relative = require('path').relative;
 
 module.exports = function(dir) {
   var clients = {};
@@ -31,7 +32,7 @@ module.exports = function(dir) {
         res.statusCode = 404;
         return res.end('all done');
       }
-      res.setHeader('x-path', path);
+      res.setHeader('x-path', relative(dir, path));
       fs.createReadStream(path).pipe(res);
     });
   }
