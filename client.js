@@ -30,12 +30,18 @@ module.exports = function (opts, cb) {
         }));
         return;
       }
+
       var path = res.headers['x-path'];
       var localPath = join(opts.destination, path);
       res.pause();
 
       // TODO cache
       mkdirp(dirname(localPath), function(err){
+        if (err) {
+          // TODO
+          console.error(new Error(message));
+          connect();
+        }
         var file = fs.createWriteStream(localPath);
         res.pipe(file);
         file.on('close', connect);
