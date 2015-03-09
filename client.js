@@ -5,6 +5,7 @@ var join = require('path').join;
 var mkdirp = require('mkdirp');
 var dirname = require('path').dirname;
 var concat = require('concat-stream');
+var Readable = require('stream').Readable;
 
 module.exports = function (opts, cb) {
   assert(opts, 'options required');
@@ -33,7 +34,7 @@ module.exports = function (opts, cb) {
 
       var path = res.headers['x-path'];
       var localPath = join(opts.destination, path);
-      res.pause();
+      var data = Readable().wrap(res);
 
       // TODO cache
       mkdirp(dirname(localPath), function(err){
@@ -43,9 +44,8 @@ module.exports = function (opts, cb) {
           connect();
         }
         var file = fs.createWriteStream(localPath);
-        res.pipe(file);
-        file.on('close', connect);
-        res.resume();
+        data.pipe(file);
+        file.on('finish', connect);
       });
     });
   }
