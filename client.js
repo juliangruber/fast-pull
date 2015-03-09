@@ -35,6 +35,7 @@ module.exports = function (opts, cb) {
       var path = res.headers['x-path'];
       var localPath = join(opts.destination, path);
       var data = Readable().wrap(res);
+      console.log('localpath', localPath)
 
       // TODO cache
       mkdirp(dirname(localPath), function(err){

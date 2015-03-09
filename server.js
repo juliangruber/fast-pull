@@ -27,6 +27,7 @@ module.exports = function(dir) {
 
     client.ready(function(){
       var path = client.next();
+      console.log('next', path)
       if (!path) {
         // TODO clean up savely
         res.statusCode = 404;
@@ -51,6 +52,7 @@ Client.prototype.load = function(dir){
   var self = this;
   readdir(dir, function(err, files){
     if (err) self.emit('error', err);
+    console.log('found %s files', files.length)
     self.files = files;
     self.loading = false;
     self.emit('loaded');
