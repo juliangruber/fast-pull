@@ -6,7 +6,8 @@ var assert = require('assert');
 
 var opts = {
   destination: argv.destionation || argv.d || process.cwd(),
-  remote: argv.remote || argv.r || argv._[0]
+  remote: argv.remote || argv.r || argv._[0],
+  concurrency: argv.concurrency || argv.c
 };
 
 pull(opts, function(){
