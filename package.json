@@ -2,9 +2,9 @@
   "name": "fast-pull",
   "dependencies": {
     "concat-stream": "^1.4.7",
-    "hyperquest": "^1.0.1",
+    "hyperquest": "^2.1.0",
     "minimist": "^1.1.0",
     "mkdirp": "^0.5.0",
-    "recursive-readdir": "^1.2.1"
+    "recursive-readdir": "^2.1.0"
   }
 }
